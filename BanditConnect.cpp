@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <sstream>
 #include <fstream>
+#include <string>
 
 using namespace std;
 
@@ -30,7 +31,35 @@ int main()
     cout << "Giddy Up Bandit! What level are you progressing to?" << endl;
     cout << "----------------------" << endl;
 
-    cin >> level;
+    for (size_t i = 0; i < 5; i++)
+    {
+        try
+        {
+            cin >> level;
+            int levelInt = stoi(level);
+            if (levelInt <= 34 && levelInt >= 0)
+            {
+                break;
+            }
+            else
+            {
+                throw 1;
+            }
+        }
+        catch (...)
+        {
+
+            if (i == 4)
+            {
+                cout << "Good Day Sir! \n";
+                return 1;
+            }
+            else if (i < 4)
+            {
+                std::cerr << "Give it another go. I don't know where your'e heading too smuggler." << '\n';
+            }
+        }
+    }
 
     cout << "\n\nReckon you've been here before? y/n: ";
     cin >> knowsPassword;
