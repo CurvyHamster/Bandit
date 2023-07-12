@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+BanditConnect
+0password.txt
+BanditConnect
+.vscode/settings.json

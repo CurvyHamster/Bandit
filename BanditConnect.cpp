@@ -25,18 +25,20 @@ int main()
 
     cin >> level;
 
-    cout << "Do you know the password partner? y/n ";
+    cout << "Been here before? y/n ";
     cin >> knowsPassword;
-    if (knowsPassword == "y")
+    if (knowsPassword == "n")
     {
         cout << "Don't you Forget it partner. \n" << "Type your jargon here!: ";
         cin >> password;
+
+        cout << "\nConnecting...\n"
+    }
+    else (knowsPassword == "y")
+    {
+        cout << "\nConnecting...\n";
     }
     
-    
-    
-
-    cout << "\nConnecting...\n"
          << endl;
     
     string filename = createFile(level, password);
