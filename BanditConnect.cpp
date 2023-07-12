@@ -13,6 +13,11 @@ string createFile(string level, string password)
     outfile << password;
     return filename;
 }
+string readfile(string level)
+{
+    string filename = level + "password.txt";
+    return filename;
+}
 
 int main()
 {
@@ -20,29 +25,35 @@ int main()
     string level;
     string password;
     string knowsPassword;
+    string filename;
+
     cout << "Giddy Up Bandit! What level are you progressing to?" << endl;
     cout << "----------------------" << endl;
 
     cin >> level;
 
-    cout << "Been here before? y/n ";
+    cout << "\n\nReckon you've been here before? y/n: ";
     cin >> knowsPassword;
     if (knowsPassword == "n")
     {
-        cout << "Don't you Forget it partner. \n" << "Type your jargon here!: ";
+        cout << "\nDon't you Forget it partner. \n\n"
+             << "Paste your jargon here!: ";
         cin >> password;
 
-        cout << "\nConnecting...\n"
+        cout << "\nConnecting...\n";
+        filename = createFile(level, password);
     }
-    else (knowsPassword == "y")
+    else if (knowsPassword == "y")
     {
         cout << "\nConnecting...\n";
+        filename = readfile(level);
     }
-    
-         << endl;
-    
-    string filename = createFile(level, password);
-    cout << filename;
+    else
+    {
+        cout << "Good Day Sir!";
+        return 1;
+    }
+
     // stringstream stream;
     // stream << input;
     // stream >> level;
@@ -57,4 +68,3 @@ int main()
 
     return 0;
 }
-
