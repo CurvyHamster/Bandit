@@ -20,7 +20,7 @@ int main()
     string level;
     string password;
     string knowsPassword;
-    cout << "Giddy Up Bandit! What level are you progressing too?" << endl;
+    cout << "Giddy Up Bandit! What level are you progressing to?" << endl;
     cout << "----------------------" << endl;
 
     cin >> level;
