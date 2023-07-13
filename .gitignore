@@ -32,7 +32,7 @@
 *.app
 BanditConnect
 0password.txt
-BanditConnect
+Programs.code-workspace
 .vscode/settings.json
 .vscode/*
 *.txt
