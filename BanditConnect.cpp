@@ -56,7 +56,7 @@ int main()
             }
             else if (i < 4)
             {
-                std::cerr << "Give it another go. I don't know where you're heading to smuggler." << '\n';
+                std::cerr << "Give it another go! I don't know where you're heading to smuggler." << '\n';
             }
         }
     }
