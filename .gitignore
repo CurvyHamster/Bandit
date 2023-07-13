@@ -34,3 +34,5 @@ BanditConnect
 0password.txt
 Programs.code-workspace
 .vscode/settings.json
+.vscode/*
+*.txt

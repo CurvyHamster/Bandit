@@ -3,51 +3,94 @@
 #include <stdlib.h>
 #include <sstream>
 #include <fstream>
+#include <string>
 
 using namespace std;
 
-string createFile(string level, string password)
+class FileManager
 {
-    string filename = level + "password.txt";
-    std::ofstream outfile(filename, std::ofstream::out);
-    outfile << password;
-    return filename;
-}
+private:
+    string level;
+    string filename;
 
+public:
+    FileManager(string level)
+    {
+        level = level;
+        filename = level + "password.txt";
+    };
+    void createFile(string password)
+    {
+        std::ofstream outfile(filename, std::ofstream::out);
+        outfile << password;
+    }
+    string getFilename()
+    {
+        return filename;
+    }
+};
 int main()
 {
-    // int input;
     string level;
     string password;
-    string knowsPassword;
+    string beenHere;
+
     cout << "Giddy Up Bandit! What level are you progressing to?" << endl;
     cout << "----------------------" << endl;
 
-    cin >> level;
-
-    cout << "Been here before? y/n ";
-    cin >> knowsPassword;
-    if (knowsPassword == "n")
+    for (size_t i = 0; i < 5; i++)
     {
-        cout << "Don't you Forget it partner. \n" << "Type your jargon here!: ";
+        try
+        {
+            cin >> level;
+            int levelInt = stoi(level);
+            if (levelInt <= 34 && levelInt >= 0)
+            {
+                break;
+            }
+            else
+            {
+                throw 1;
+            }
+        }
+        catch (...)
+        {
+
+            if (i == 4)
+            {
+                cout << "Good Day Sir! \n";
+                return 1;
+            }
+            else if (i < 4)
+            {
+                std::cerr << "Give it another go! I don't know where you're heading to smuggler." << '\n';
+            }
+        }
+    }
+    FileManager fileManager = FileManager(level);
+    cout << "\n\nReckon you've been here before? y/n: ";
+    cin >> beenHere;
+    if (beenHere == "n")
+    {
+        cout << "\nDon't you Forget it partner. \n\n"
+             << "Paste your jargon here!: ";
         cin >> password;
 
-        cout << "\nConnecting...\n"
+        cout << "\nConnecting...\n";
+
+        fileManager.createFile(password);
     }
-    else (knowsPassword == "y")
+    else if (beenHere == "y")
     {
         cout << "\nConnecting...\n";
     }
-    
-         << endl;
-    
-    string filename = createFile(level, password);
-    cout << filename;
-    // stringstream stream;
-    // stream << input;
-    // stream >> level;
+    else
+    {
+        cout << "Good Day Sir!";
+        return 1;
+    }
 
-    string composite = std::string("sudo sshpass -f ") + filename + " ssh bandit" + level + std::string("@bandit.labs.overthewire.org -p 2220");
+    string composite = std::string("sudo sshpass -f ") + fileManager.getFilename() + " ssh bandit" + level + std::string("@bandit.labs.overthewire.org -p 2220");
 
     char command[100];
     strcpy(command, composite.c_str());
@@ -57,4 +100,3 @@ int main()
 
     return 0;
 }
-
