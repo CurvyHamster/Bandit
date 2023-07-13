@@ -7,26 +7,33 @@
 
 using namespace std;
 
-string createFile(string level, string password)
+class FileManager
 {
-    string filename = level + "password.txt";
-    std::ofstream outfile(filename, std::ofstream::out);
-    outfile << password;
-    return filename;
-}
-string readfile(string level)
-{
-    string filename = level + "password.txt";
-    return filename;
-}
+private:
+    string level;
+    string filename;
 
+public:
+    FileManager(string level)
+    {
+        level = level;
+        filename = level + "password.txt";
+    };
+    void createFile(string password)
+    {
+        std::ofstream outfile(filename, std::ofstream::out);
+        outfile << password;
+    }
+    string getFilename()
+    {
+        return filename;
+    }
+};
 int main()
 {
-    // int input;
     string level;
     string password;
     string beenHere;
-    string filename;
 
     cout << "Giddy Up Bandit! What level are you progressing to?" << endl;
     cout << "----------------------" << endl;
@@ -56,11 +63,11 @@ int main()
             }
             else if (i < 4)
             {
-                std::cerr << "Give it another go. I don't know where you're heading to smuggler." << '\n';
+                std::cerr << "Give it another go! I don't know where you're heading to smuggler." << '\n';
             }
         }
     }
-
+    FileManager fileManager = FileManager(level);
     cout << "\n\nReckon you've been here before? y/n: ";
     cin >> beenHere;
     if (beenHere == "n")
@@ -70,12 +77,12 @@ int main()
         cin >> password;
 
         cout << "\nConnecting...\n";
-        filename = createFile(level, password);
+
+        fileManager.createFile(password);
     }
     else if (beenHere == "y")
     {
         cout << "\nConnecting...\n";
-        filename = readfile(level);
     }
     else
     {
@@ -83,11 +90,7 @@ int main()
         return 1;
     }
 
-    // stringstream stream;
-    // stream << input;
-    // stream >> level;
-
-    string composite = std::string("sudo sshpass -f ") + filename + " ssh bandit" + level + std::string("@bandit.labs.overthewire.org -p 2220");
+    string composite = std::string("sudo sshpass -f ") + fileManager.getFilename() + " ssh bandit" + level + std::string("@bandit.labs.overthewire.org -p 2220");
 
     char command[100];
     strcpy(command, composite.c_str());
