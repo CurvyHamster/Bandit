@@ -25,7 +25,7 @@ int main()
     // int input;
     string level;
     string password;
-    string knowsPassword;
+    string beenHere;
     string filename;
 
     cout << "Giddy Up Bandit! What level are you progressing to?" << endl;
@@ -56,14 +56,14 @@ int main()
             }
             else if (i < 4)
             {
-                std::cerr << "Give it another go. I don't know where your'e heading too smuggler." << '\n';
+                std::cerr << "Give it another go. I don't know where you're heading to smuggler." << '\n';
             }
         }
     }
 
     cout << "\n\nReckon you've been here before? y/n: ";
-    cin >> knowsPassword;
-    if (knowsPassword == "n")
+    cin >> beenHere;
+    if (beenHere == "n")
     {
         cout << "\nDon't you Forget it partner. \n\n"
              << "Paste your jargon here!: ";
@@ -72,7 +72,7 @@ int main()
         cout << "\nConnecting...\n";
         filename = createFile(level, password);
     }
-    else if (knowsPassword == "y")
+    else if (beenHere == "y")
     {
         cout << "\nConnecting...\n";
         filename = readfile(level);
