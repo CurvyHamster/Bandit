@@ -238,11 +238,13 @@ public:
     }
     static string compileRules(string level)
     {
+        int forcurl = stoi(level);
+        forcurl += 1;
+        level = to_string(forcurl);
         string html = requestHtml(level);
         string parsedText = parseText(html);
         string output = createOutputText(parsedText);
         return output;
-        
     }
 };
 int main(int argc, char **argv)
@@ -284,6 +286,7 @@ int main(int argc, char **argv)
             }
         }
     }
+    
     string rules = RuleReader::compileRules(level); 
     FileManager fileManager = FileManager(level);
 
