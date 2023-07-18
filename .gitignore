@@ -36,3 +36,8 @@ Programs.code-workspace
 .vscode/settings.json
 .vscode/*
 *.txt
+BanditRuleReader
+rulecpp.cpp
+.gitignore
+.gitignore
+BandUpBandits
