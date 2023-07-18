@@ -183,25 +183,19 @@ private:
         std::regex re("\\.\\s");
         std::string tracenewline = std::regex_replace(parsedText, re, ".\n");
         parsedText = tracenewline;
-        // removes spaces after every new line
-        pos = 0;
-        while ((pos = parsedText.find("\n ", pos)) != std::string::npos)
-        {
-            parsedText.erase(pos + 1, 1);
-        }
         // find position of levells. Change it to "level:  "
         pos = parsedText.find(commandlist);
         if (pos != std::string::npos)
         {
             // Insert a colon and space after "level"
-            parsedText.insert(pos + 41, ": ");
+            parsedText.insert(pos + 41, ":\n");
         }
         // add a new line before commandlist
         pos = 0;
         pos = parsedText.find(commandlist);
         if (pos != std::string::npos)
         {
-            parsedText.insert(pos + 0, ".\n");
+            parsedText.insert(pos + 0, ".\n\n");
         }
         // I know this is a bit tedious but i'm removing any empty spaces.
         pos = 0;
@@ -211,6 +205,19 @@ private:
         }
         pos = 0;
         while ((pos = parsedText.find("..", pos)) != std::string::npos)
+        {
+            parsedText.erase(pos + 1, 1);
+        }
+        //change > symbol to a colon followed by a new line
+        pos = 0;
+        while ((pos = parsedText.find(">", pos)) != std::string::npos)
+        {
+            parsedText.replace(pos, 1, ":\n");
+            pos += 1;
+        }
+         // removes spaces after every new line
+        pos = 0;
+        while ((pos = parsedText.find("\n ", pos)) != std::string::npos)
         {
             parsedText.erase(pos + 1, 1);
         }
@@ -228,9 +235,9 @@ private:
 public:
     static void outputTheRules(string rules)
     {
-        cout << "\n\n\n\n\nThe Golden Rule is as follows: \n";
+        cout << "\n\n\n\n\n\n\n\n\n\nThe Golden Rule is as follows: \n";
         cout << rules << "\n\n\n\n";
-        cout << "Caution!, Strangers are Unwelcome.                                 Proceed?\n";
+        cout << "Caution!, Strangers are Unwelcome.                                Proceed?\n";
         cout << "Press enter to continue...";
         cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         cin.get();
