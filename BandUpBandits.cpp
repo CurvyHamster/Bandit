@@ -12,6 +12,7 @@
 #include "thread"
 #include <limits>
 #include <regex>
+#include <stdio.h>
 
 using namespace std;
 class FileManager
@@ -208,14 +209,14 @@ private:
         {
             parsedText.erase(pos + 1, 1);
         }
-        //change > symbol to a colon followed by a new line
+        // change > symbol to a colon followed by a new line
         pos = 0;
         while ((pos = parsedText.find(">", pos)) != std::string::npos)
         {
             parsedText.replace(pos, 1, ":\n");
             pos += 1;
         }
-         // removes spaces after every new line
+        // removes spaces after every new line
         pos = 0;
         while ((pos = parsedText.find("\n ", pos)) != std::string::npos)
         {
@@ -293,8 +294,8 @@ int main(int argc, char **argv)
             }
         }
     }
-    
-    string rules = RuleReader::compileRules(level); 
+
+    string rules = RuleReader::compileRules(level);
     FileManager fileManager = FileManager(level);
 
     cout << "\n\nReckon you've been here before? y/n: ";
@@ -308,7 +309,7 @@ int main(int argc, char **argv)
         RuleReader::outputTheRules(rules);
     }
     else if (beenHere == "y")
-    {   
+    {
         RuleReader::outputTheRules(rules);
     }
     else
@@ -317,13 +318,9 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    string composite = std::string("sudo sshpass -f ") + fileManager.getFilename() + " ssh bandit" + level + std::string("@bandit.labs.overthewire.org -p 2220");
-
+    string composite = std::string("sudo sshpass -f ") + fileManager.getFilename() + " ssh -o StrictHostKeyChecking=no bandit" + level + std::string("@bandit.labs.overthewire.org -p 2220");
     char command[100];
     strcpy(command, composite.c_str());
-
     system(command);
-    system("pause");
-
     return 0;
 }
