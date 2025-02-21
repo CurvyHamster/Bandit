@@ -317,7 +317,7 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    string composite = std::string("sudo sshpass -f ") + fileManager.getFilename() + " ssh bandit" + level + std::string("@bandit.labs.overthewire.org -p 2220");
+    string composite = std::string("sudo sshpass -f ") + fileManager.getFilename() + " ssh -o StrictHostKeyChecking=no bandit" + level + std::string("@bandit.labs.overthewire.org -p 2220");
 
     char command[100];
     strcpy(command, composite.c_str());
