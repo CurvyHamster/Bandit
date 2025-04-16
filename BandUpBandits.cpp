@@ -21,10 +21,8 @@ private:
     string filename;
 
 public:
-    FileManager(string level)
+    FileManager(string lvl) : level(lvl), filename(lvl + "password.txt")
     {
-        level = level;
-        filename = level + "password.txt";
     };
     void createFile(string password)
     {
